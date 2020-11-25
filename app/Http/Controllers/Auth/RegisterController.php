@@ -52,7 +52,6 @@ class RegisterController extends Controller
         $string = 'string';
         $max255 = 'max:255';
         $email = 'email';
-
         return Validator::make($data, [
             'name' => [$required, $string, $max255],
             $email => [$required, $string, $email, $max255, 'unique:users'],
