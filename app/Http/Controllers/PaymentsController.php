@@ -51,7 +51,7 @@ class PaymentsController extends Controller
                         'cvv' => '100'
                     ]);
           echo "<pre>"; print_r($result);
-          echo $token = $result->creditCard->token;
+          echo $result->creditCard->token;
       }
 
       /* Get saved cards from braintree */
@@ -67,7 +67,7 @@ class PaymentsController extends Controller
       {
           $gateway = $this->brainConfig();
           $result = $gateway->paymentMethodNonce()->create('7s8q8f');
-          echo  $nonce = $result->paymentMethodNonce->nonce;
+          echo $result->paymentMethodNonce->nonce;
       }
 
       /* Function to delete the saved card on braintree */
@@ -80,8 +80,7 @@ class PaymentsController extends Controller
       /* Config function to get the braintree config data to process all the apis on braintree gateway */
       public function brainConfig()
       {
-        return $gateway = new Braintree_Gateway([
-                          'environment' => env('BRAINTREE_ENV'),
+        return new Braintree_Gateway([ 'environment' => env('BRAINTREE_ENV'),
                           'merchantId' => env('BRAINTREE_MERCHANT_ID'),
                           'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
                           'privateKey' => env('BRAINTREE_PRIVATE_KEY')
